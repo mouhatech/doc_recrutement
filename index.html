@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Ajoutez du CSS pour styliser le site */
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .product-container {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #f2f2f2;
+        display: inline-block;
+        width: 20%;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .product-image {
+        width: 100%;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 10px;
+      }
+
+      .product-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .product-price {
+        color: green;
+        margin-bottom: 5px;
+      }
+
+      .add-to-cart {
+        padding: 10px 20px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Magasin de produits informatiques</h1>
+      <div id="product-list">
+        <!-- Afficher la liste des produits -->
+      </div>
+      <div id="cart">
+        <h2>Panier</h2>
+        <div id="cart-list">
+          <!-- Afficher la liste des produits dans le panier -->
+        </div>
+        <p id="total">Total : 0 €</p>
+      </div>
+    </div>
+
+    <!-- Ajoutez du JavaScript pour ajouter la logique de la boutique en ligne -->
+    <script>
+      var products = [
+        {
+          id: 1,
+          name: "Ordinateur portable",
+          image: "https://via.placeholder.com/400x200",
+          price: 999.99
+        },
+        {
+          id: 2,
+          name: "Clavier gamer",
+          image: "https://via.placeholder.com/400x200",
+          price: 79.99
+        },
+        {
+          id: 3,
+          name: "Souris gamer",
+          image: "https://via.placeholder.com/400x200",
+          price: 59.99
+        }
+        // Ajoutez plus de produits si nécessaire
+      ];
+
+      var cart = [];
+      var total = 0;
+
+      var productList = document.getElementById("product-list");
+      var cartList = document.getElementById("cart-list");
+      var totalPrice = document.getElementById("total");
+
+      // Afficher la liste des produits
+      for (var i = 0; i < products.length; i++)
+{
+var product = products[i];
+var productContainer = document.createElement("div");
+productContainer.className = "product-container";
+    var productImage = document.createElement("div");
+    productImage.className = "product-image";
+    productImage.style.backgroundImage = "url('" + product.image + "')";
+
+    var productName = document.createElement("div");
+    productName.className = "product-name";
+    productName.innerHTML = product.name;
+
+    var productPrice = document.createElement("div");
+    productPrice.className = "product-price";
+    productPrice.innerHTML = product.price + " €";
+
+    var addToCartButton = document.createElement("button");
+    addToCartButton.className = "add-to-cart";
+    addToCartButton.innerHTML = "Ajouter au panier";
+    addToCartButton.addEventListener("click", function() {
+      addToCart(product);
+    });
+
+    productContainer.appendChild(productImage);
+    productContainer.appendChild(productName);
+    productContainer.appendChild(productPrice);
+    productContainer.appendChild(addToCartButton);
+
+    productList.appendChild(productContainer);
+  }
+
+  // Ajouter un produit au panier
+  function addToCart(product) {
+    cart.push(product);
+    updateCart();
+  }
+
+  // Mettre à jour le panier
+  function updateCart() {
+    cartList.innerHTML = "";
+    total = 0;
+
+    for (var i = 0; i < cart.length; i++) {
+      var product = cart[i];
+      var productContainer = document.createElement("div");
+      productContainer.innerHTML =
+        product.name + " - " + product.price + " €";
+
+      cartList.appendChild(productContainer);
+      total += product.price;
+    }
+
+    totalPrice.innerHTML = "Total : " + total + " €";
+  }
+</script>
+ </body>
+</html>
